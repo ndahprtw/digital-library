@@ -19,7 +19,13 @@ Route::middleware('auth')->group(function () {
 
 });
    
-Route::resource('buku', BookController::class);
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('buku', BookController::class);
+});
+
+Route::middleware(['auth', 'role:petugas'])->group(function () {
+    Route::resource('buku', BookController::class)->only(['index', 'show']);
+});
 
 
 Route::get('/test', function () {
