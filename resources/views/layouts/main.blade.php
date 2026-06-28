@@ -64,5 +64,7 @@
     <!-- current page js files -->
     <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard2.js') }}"></script>
+    {{-- <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/datatable/datatable-basic.init.js') }}"></script> --}}
   </body>
 </html>
