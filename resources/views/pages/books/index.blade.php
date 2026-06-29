@@ -29,7 +29,13 @@
                     <div class="card-body">
 
                         @if(session('success'))
-                            {{ session('success') }}
+                            <p class="text-success">
+                                {{ session('success') }}
+                            </p>
+                        @elseif(session('error'))
+                            <p class="text-danger">
+                                {{ session('error') }}
+                            </p>
                         @endif
 
                         <div class="d-flex justify-content-between align-items-center my-3">
@@ -49,6 +55,7 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Judul</th>
+                                        <th>Kategori</th>
                                         <th>Penulis</th>
                                         <th>Penerbit</th>
                                         <th>Tahun Terbit</th>
@@ -62,6 +69,7 @@
                                         <tr>
                                             <td> {{ $no+1 }} </td>
                                             <td> {{ $item->judul }} </td>
+                                            <td> {{ $item->category->nama_kategori }} </td>
                                             <td> {{ $item->penulis }} </td>
                                             <td> {{ $item->penerbit }} </td>
                                             <td> {{ $item->tahun_terbit }} </td>
@@ -74,12 +82,20 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-primary">Edit</a>
-                                                <form action="{{ route('buku.destroy', $item->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger" type="submit">Hapus</button>
-                                                </form>
+                                                {{-- @if (auth()->user()->role == 'admin') --}}
+                                                    <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-primary">Edit</a>
+                                                    <form action="{{ route('buku.destroy', $item->id) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="btn btn-danger" type="submit">Hapus</button>
+                                                    </form>
+                                                {{-- @else --}}
+                                                    <form action="{{ route('pinjam.store') }}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="book_id" value="{{ $item->id }}">
+                                                        <button class="btn btn-success" type="submit">Pinjam</button>
+                                                    </form>
+                                                {{-- @endif --}}
                                             </td>
                                         </tr>
                                     @empty

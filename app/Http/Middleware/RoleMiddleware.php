@@ -26,6 +26,7 @@ class RoleMiddleware
         // cek role user
         if (! in_array(Auth::user()->role, $roles)) {
             abort(403);
+            // dd(Auth::check(), Auth::user());
         }
 
         return $next($request);

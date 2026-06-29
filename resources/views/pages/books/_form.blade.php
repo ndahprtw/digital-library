@@ -6,6 +6,22 @@
     @enderror
 </div>
 <div class="mb-3">
+    <label class="form-label" for="category_id">Kategori</label>
+    <select name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror">
+        @foreach ($kategori as $item)
+            <option value="" selected disabled>Pilih Kategori Buku</option>
+            <option value="{{ $item->id }}"
+                {{ old('category_id', $buku?->category_id ?? '') == $item->id ? 'selected' : '' }}>
+                {{ $item->nama_kategori }}
+            </option>
+        @endforeach
+    </select>
+
+    @error('category_id')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+<div class="mb-3">
     <label class="form-label" for="penulis"> Penulis </label>
     <input class="form-control @error('penulis') is-invalid @enderror" type="text" name="penulis" id="penulis" value="{{ old('penulis', $buku?->penulis ?? '') }}">
     @error('penulis') 

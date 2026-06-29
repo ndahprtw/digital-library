@@ -24,57 +24,49 @@
         <!-- Dashboard -->
         <!-- =================== -->
         <li class="sidebar-item">
-          <a class="sidebar-link" href="./index.html" aria-expanded="false">
+          <a class="sidebar-link" href="/dashboard" aria-expanded="false">
             <span>
               <i class="ti ti-aperture"></i>
             </span>
-            <span class="hide-menu">Modern</span>
+            <span class="hide-menu">Dashboard</span>
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="./index2.html" aria-expanded="false">
+          <a class="sidebar-link" href="/kategori" aria-expanded="false">
             <span>
               <i class="ti ti-shopping-cart"></i>
             </span>
-            <span class="hide-menu">eCommerce</span>
+            <span class="hide-menu">Kategori</span>
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="./index3.html" aria-expanded="false">
+          <a class="sidebar-link" href="/buku" aria-expanded="false">
             <span>
               <i class="ti ti-currency-dollar"></i>
             </span>
-            <span class="hide-menu">NFT</span>
+            <span class="hide-menu">Buku</span>
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="./index4.html" aria-expanded="false">
+          <a class="sidebar-link" href="/pinjam" aria-expanded="false">
             <span>
               <i class="ti ti-cpu"></i>
             </span>
-            <span class="hide-menu">Crypto</span>
+            <span class="hide-menu">Peminjaman</span>
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="./index5.html" aria-expanded="false">
+          <a class="sidebar-link" href="/logut" aria-expanded="false">
             <span>
               <i class="ti ti-activity-heartbeat"></i>
             </span>
-            <span class="hide-menu">General</span>
-          </a>
-        </li>
-        <li class="sidebar-item">
-          <a class="sidebar-link" href="./index6.html" aria-expanded="false">
-            <span>
-              <i class="ti ti-playlist"></i>
-            </span>
-            <span class="hide-menu">Music</span>
+            <span class="hide-menu">Logout</span>
           </a>
         </li>
       </ul>
 
 
-      <div class="unlimited-access hide-menu bg-light-primary position-relative my-7 rounded">
+      {{-- <div class="unlimited-access hide-menu bg-light-primary position-relative my-7 rounded">
         <div class="d-flex">
           <div class="unlimited-access-title">
             <h6 class="fw-semibold fs-4 mb-6 text-dark w-85">Unlimited Access</h6>
@@ -84,10 +76,10 @@
             <img src="{{ asset('assets/images/backgrounds/rocket.png') }}" alt="" class="img-fluid">
           </div>
         </div>
-      </div>
+      </div> --}}
     </nav>
     
-    <div class="fixed-profile p-3 bg-light-secondary rounded sidebar-ad mt-3">
+    {{-- <div class="fixed-profile p-3 bg-light-secondary rounded sidebar-ad mt-3">
       <div class="hstack gap-3">
         <div class="john-img">
           <img src="{{ asset('assets/images/profile/user-1') }}" class="rounded-circle" width="40" height="40" alt="">
@@ -100,7 +92,7 @@
           <i class="ti ti-power fs-6"></i>
         </button>
       </div>
-    </div>  
+    </div>   --}}
     <!-- End Sidebar navigation -->
   </div>
   <!-- End Sidebar scroll-->

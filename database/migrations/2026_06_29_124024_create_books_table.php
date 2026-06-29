@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('penerbit');
             $table->integer('tahun_terbit');
             $table->integer('stok');
+            $table->foreignId('category_id')->constrained()->restrictOnDelete();
             $table->string('cover')->nullable();
             $table->timestamps();
         });

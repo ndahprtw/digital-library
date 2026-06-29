@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -13,6 +15,7 @@ class BookController extends Controller
     public function index(Request $request)
     {
         $data = Book::query()
+        ->with('category')
         ->when($request->search, function ($query) use ($request) {
             $query->where('judul', 'like', "%{$request->search}%");
         })
@@ -27,7 +30,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('pages.books.create');
+        $kategori = Category::orderBy('nama_kategori')->get();
+        return view('pages.books.create', compact('kategori'));
     }
 
     /**
@@ -70,7 +74,8 @@ class BookController extends Controller
      */
     public function edit(Book $buku)
     {
-        return view('pages.books.edit', compact('buku'));
+        $kategori = Category::orderBy('nama_kategori')->get();
+        return view('pages.books.edit', compact('buku', 'kategori'));
     }
 
     /**
