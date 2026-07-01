@@ -4,6 +4,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,23 +23,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-
-    // Buku
-    // Route::get('/buku', [BookController::class, 'index'])->name('buku.index');
-    // Route::get('/buku/{buku}', [BookController::class, 'show'])->name('buku.show');
-
-    // Kategori
-    // Route::get('/kategori', [CategoryController::class, 'index'])->name('kategori.index');
+    
     Route::resource('pinjam', BorrowController::class);
 
-    Route::middleware('role:admin')->group(function () {
-
-        Route::resource('buku', BookController::class);
-
-        Route::resource('kategori', CategoryController::class)
-            ->except(['index']);
-
-    });
+    Route::resource('buku', BookController::class);
+    Route::resource('user', UserController::class);
+    Route::resource('kategori', CategoryController::class);
 
 });
 

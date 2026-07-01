@@ -6,9 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class BookController extends Controller
+class BookController extends Controller implements HasMiddleware
 {
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:view books', only: ['index', 'show']),
+            new Middleware('permission:create books', only: ['create', 'store']),
+            new Middleware('permission:edit books', only: ['edit', 'update']),
+            new Middleware('permission:delete books', only: ['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */

@@ -38,15 +38,17 @@
                             </p>
                         @endif
 
-                        {{-- <div class="d-flex justify-content-between align-items-center my-3">
+                        <div class="d-flex justify-content-between align-items-center my-3">
                             <form action="{{ route('kategori.index') }}" method="GET" class="d-flex">
                                 <input class="form-control" type="text" name="search" value="{{ request('search') }}" placeholder="Cari Kategori">
                                 <button type="submit" class="btn btn-primary">Cari</button>
                                 <a href="{{ route('kategori.index') }}" class="btn btn-primary mx-3">Refresh</a>
                             </form>
 
-                            <a href="{{ route('kategori.create') }}" class="btn btn-primary">Tambah Data</a>
-                        </div> --}}
+                            @can('view categories')
+                                <a href="{{ route('kategori.create') }}" class="btn btn-primary">Tambah Data</a>
+                            @endcan
+                        </div>
 
                         <div class="table-responsive">
 
@@ -72,14 +74,16 @@
                                             <td> {{ $item->buku->judul }} </td>
                                             <td> {{ $item->status }} </td>
                                             <td>
-                                                @if ($item->status == 'dipinjam')
-                                                    <form action="{{ route('pinjam.update', $item->id) }}" method="post">
-                                                        @csrf
-                                                        @method('put')
-                                                        <input type="hidden" name="book_id" value="{{ $item->buku->id }}">
-                                                        <button class="btn btn-success" type="submit">Terima</button>
-                                                    </form>
-                                                @endif
+                                                @can('return books')
+                                                    @if ($item->status == 'dipinjam')
+                                                        <form action="{{ route('pinjam.update', $item->id) }}" method="post">
+                                                            @csrf
+                                                            @method('put')
+                                                            <input type="hidden" name="book_id" value="{{ $item->buku->id }}">
+                                                            <button class="btn btn-success" type="submit">Terima</button>
+                                                        </form>
+                                                    @endif
+                                                @endcan
                                             </td>
                                         </tr>
                                     @empty

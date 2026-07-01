@@ -31,37 +31,57 @@
             <span class="hide-menu">Dashboard</span>
           </a>
         </li>
+        @can('manage users')
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/user" aria-expanded="false">
+              <span>
+                <i class="ti ti-person"></i>
+              </span>
+              <span class="hide-menu">User</span>
+            </a>
+          </li>
+        @endcan
+        @can('view categories')
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/kategori" aria-expanded="false">
+              <span>
+                <i class="ti ti-shopping-cart"></i>
+              </span>
+              <span class="hide-menu">Kategori</span>
+            </a>
+          </li>
+        @endcan
+        @can('view books')
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/buku" aria-expanded="false">
+              <span>
+                <i class="ti ti-currency-dollar"></i>
+              </span>
+              <span class="hide-menu">Buku</span>
+            </a>
+          </li>
+        @endcan
+        @can('borrow books')
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="/pinjam" aria-expanded="false">
+              <span>
+                <i class="ti ti-cpu"></i>
+              </span>
+              <span class="hide-menu">Peminjaman</span>
+            </a>
+          </li>
+        @endcan
         <li class="sidebar-item">
-          <a class="sidebar-link" href="/kategori" aria-expanded="false">
-            <span>
-              <i class="ti ti-shopping-cart"></i>
-            </span>
-            <span class="hide-menu">Kategori</span>
-          </a>
-        </li>
-        <li class="sidebar-item">
-          <a class="sidebar-link" href="/buku" aria-expanded="false">
-            <span>
-              <i class="ti ti-currency-dollar"></i>
-            </span>
-            <span class="hide-menu">Buku</span>
-          </a>
-        </li>
-        <li class="sidebar-item">
-          <a class="sidebar-link" href="/pinjam" aria-expanded="false">
-            <span>
-              <i class="ti ti-cpu"></i>
-            </span>
-            <span class="hide-menu">Peminjaman</span>
-          </a>
-        </li>
-        <li class="sidebar-item">
-          <a class="sidebar-link" href="/logut" aria-expanded="false">
-            <span>
-              <i class="ti ti-activity-heartbeat"></i>
-            </span>
-            <span class="hide-menu">Logout</span>
-          </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <a href="{{ route('logout') }}" class="sidebar-link" onclick="event.preventDefault(); this.closest('form').submit();">
+                    <span>
+                        <i class="ti ti-activity-heartbeat"></i>
+                    </span>
+                    <span class="hide-menu">Logout</span>
+                </a>
+            </form>
         </li>
       </ul>
 

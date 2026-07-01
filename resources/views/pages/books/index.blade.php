@@ -45,7 +45,9 @@
                                 <a href="{{ route('buku.index') }}" class="btn btn-primary mx-3">Refresh</a>
                             </form>
 
-                            <a href="{{ route('buku.create') }}" class="btn btn-primary">Tambah Data</a>
+                            @can('create books')
+                                <a href="{{ route('buku.create') }}" class="btn btn-primary">Tambah Data</a>
+                            @endcan
                         </div>
 
                         <div class="table-responsive">
@@ -82,20 +84,23 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                {{-- @if (auth()->user()->role == 'admin') --}}
+                                                @can('edit books')
                                                     <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-primary">Edit</a>
+                                                @endcan
+                                                @can('delete books')
                                                     <form action="{{ route('buku.destroy', $item->id) }}" method="post">
                                                         @csrf
                                                         @method('delete')
                                                         <button class="btn btn-danger" type="submit">Hapus</button>
                                                     </form>
-                                                {{-- @else --}}
+                                                @endcan
+                                                @can('borrow books')
                                                     <form action="{{ route('pinjam.store') }}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="book_id" value="{{ $item->id }}">
                                                         <button class="btn btn-success" type="submit">Pinjam</button>
                                                     </form>
-                                                {{-- @endif --}}
+                                                @endcan
                                             </td>
                                         </tr>
                                     @empty

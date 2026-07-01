@@ -6,10 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Services\BorrowingService;
 use App\Models\Borrow;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class BorrowController extends Controller
+class BorrowController extends Controller implements HasMiddleware
 {
 
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:borrow books', only: ['index', 'store']),
+            new Middleware('permission:return books', only: ['create', 'update']),
+        ];
+    }
     protected BorrowingService $borrowingService;
 
     public function __construct(BorrowingService $borrowingService)

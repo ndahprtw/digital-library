@@ -8,8 +8,8 @@
             <div class="col-lg-4">
               <div class="text-center">
                 <img src="{{ asset('assets/images/backgrounds/login-security.svg') }}" alt="" class="img-fluid" width="500">
-                <h1 class="fw-semibold mb-7 fs-9">Opps!!!</h1>
-                <h4 class="fw-semibold mb-7">Anda tidak memilik akses tersebut disini.</h4>
+                <h1 class="fw-semibold mb-7 fs-9">Akses Ditolak!</h1>
+                <h4 class="fw-semibold mb-7">Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.</h4>
                 <a class="btn btn-primary" href="/dashboard" role="button">Dashboard</a>
               </div>
             </div>

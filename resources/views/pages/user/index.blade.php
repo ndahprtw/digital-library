@@ -6,11 +6,11 @@
         <div class="card-body px-4 py-3">
         <div class="row align-items-center">
             <div class="col-9">
-            <h4 class="fw-semibold mb-8">Kategori</h4>
+            <h4 class="fw-semibold mb-8">User</h4>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a class="text-muted " href="/dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page">Kategori</li>
+                <li class="breadcrumb-item" aria-current="page">User</li>
                 </ol>
             </nav>
             </div>
@@ -38,9 +38,8 @@
                                 <button type="submit" class="btn btn-primary">Cari</button>
                                 <a href="{{ route('kategori.index') }}" class="btn btn-primary mx-3">Refresh</a>
                             </form>
-                            @can('create categories')
-                                <a href="{{ route('kategori.create') }}" class="btn btn-primary">Tambah Data</a>
-                            @endcan
+
+                            <a href="{{ route('kategori.create') }}" class="btn btn-primary">Tambah Data</a>
                         </div>
 
                         <div class="table-responsive">
@@ -50,29 +49,23 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Kategori</th>
-                                        <th>Jumlah</th>
-                                        <th></th>
+                                        <th>ROles</th>
+                                        <th>Permission</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($data as $no => $item)
                                         <tr>
                                             <td> {{ $no+1 }} </td>
-                                            <td> {{ $item->nama_kategori }} </td>
+                                            <td> {{ $item->name }} </td>
+                                            <td> {{ $item->getRoleNames()->implode(', ') }} </td>
                                             <td>
-                                                {{ $item->buku->count(); }}
-                                            </td>
-                                            <td>
-                                                @can('edit categories')
-                                                    <a href="{{ route('kategori.edit', $item->id) }}" class="btn btn-primary">Edit</a>
-                                                @endcan
-                                                @can('delete categories')
-                                                    <form action="{{ route('kategori.destroy', $item->id) }}" method="post">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-danger" type="submit">Hapus</button>
-                                                    </form>
-                                                @endcan
+
+                                                {{ $item->getAllPermissions()->pluck('name')->implode(', ') }}
+
+                                                @foreach ($item->getPermissionNames() as $permission)
+                                                    <li>{{ $permission }}</li>
+                                                @endforeach
                                             </td>
                                         </tr>
                                     @empty
