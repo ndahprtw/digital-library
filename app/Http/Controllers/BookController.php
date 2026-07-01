@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -92,5 +93,21 @@ class BookController extends Controller implements HasMiddleware
     {
         $buku->delete();
         return redirect()->route('buku.index')->with('success', 'Data berhasil dihapus.');
+    }
+
+    public function exportPdf()
+    {
+        $data = Book::with('category')->get();
+
+        // return view('pages.books.download', compact('data'));
+        $pdf = Pdf::loadView('pages.books.download', compact('data'))
+            ->setPaper('a4', 'portrait'); //untuk set uk ukuran kertas dan orientasi
+
+
+        // // jika ingin langsung mendownload file PDF
+        // return $pdf->download('laporan-buku.pdf');
+
+        // jika ingin menampilkan preview PDF
+        return $pdf->stream('laporan.pdf');
     }
 }

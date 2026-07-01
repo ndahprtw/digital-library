@@ -45,9 +45,15 @@
                                 <a href="{{ route('buku.index') }}" class="btn btn-primary mx-3">Refresh</a>
                             </form>
 
-                            @can('create books')
-                                <a href="{{ route('buku.create') }}" class="btn btn-primary">Tambah Data</a>
-                            @endcan
+                            <div class="d-flex gap-2">
+                                <a href="{{ route('buku.export.pdf') }}" target="_blank" class="btn btn-danger">
+                                    Export PDF
+                                </a>
+                                
+                                @can('create books')
+                                    <a href="{{ route('buku.create') }}" class="btn btn-primary">Tambah Data</a>
+                                @endcan
+                            </div>
                         </div>
 
                         <div class="table-responsive">
