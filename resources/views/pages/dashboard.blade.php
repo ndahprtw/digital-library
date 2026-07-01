@@ -1,17 +1,38 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.main')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+@section('content')
+    <div class="container-fluid">
+    <div class="card bg-light-info shadow-none position-relative overflow-hidden">
+        <div class="card-body px-4 py-3">
+        <div class="row align-items-center">
+            <div class="col-9">
+            <h4 class="fw-semibold mb-8">Dashboard</h4>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page">Dashboard</li>
+                </ol>
+            </nav>
+            </div>
+            <div class="col-3">
+            <div class="text-center mb-n5">  
+                <img src="{{ asset('assets/images/breadcrumb/ChatBc.png') }}" alt="" class="img-fluid mb-n4">
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <section class="datatables">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</x-app-layout>
+
+    </section>
+</div>
+@endsection

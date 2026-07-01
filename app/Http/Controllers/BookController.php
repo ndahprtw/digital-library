@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 class BookController extends Controller implements HasMiddleware
 {
@@ -49,26 +51,9 @@ class BookController extends Controller implements HasMiddleware
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBookRequest $request)
     {
-        $request->validate([
-            'judul' => 'required',
-            'penulis' => 'required',
-            'penerbit' => 'required',
-            'tahun_terbit' => 'required|integer',
-            'stok' => 'required|integer|min:0',
-        ],[
-            'required' => ':attribute wajib diisi.',
-            'integer' => ':attribute harus berupa angka.',
-        ]);
-
-        Book::create([
-            'judul' => $request->judul,
-            'penulis' => $request->penulis,
-            'penerbit' => $request->penerbit,
-            'tahun_terbit' => $request->tahun_terbit,
-            'stok' => $request->stok
-        ]);
+        Book::create($request->validated());
     
         return redirect()->route('buku.index')->with('success', 'Data berhasil ditambahkan.');
     }
@@ -93,26 +78,9 @@ class BookController extends Controller implements HasMiddleware
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $buku)
+    public function update(UpdateBookRequest $request, Book $buku)
     {
-        $request->validate([
-            'judul' => 'required',
-            'penulis' => 'required',
-            'penerbit' => 'required',
-            'tahun_terbit' => 'required|integer',
-            'stok' => 'required|integer|min:0',
-        ],[
-            'required' => ':attribute wajib diisi.',
-            'integer' => ':attribute harus berupa angka.',
-        ]);
-
-        $buku->update([
-            'judul' => $request->judul,
-            'penulis' => $request->penulis,
-            'penerbit' => $request->penerbit,
-            'tahun_terbit' => $request->tahun_terbit,
-            'stok' => $request->stok
-        ]);
+        $buku->update($request->validated());
     
         return redirect()->route('buku.index')->with('success', 'Data berhasil diperbarui.');
     }
