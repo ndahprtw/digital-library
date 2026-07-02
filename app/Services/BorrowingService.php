@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Book;
 use App\Models\Borrow;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BorrowSuccessMail;
 class BorrowingService
 {
     public function borrow(array $data)
@@ -21,13 +23,16 @@ class BorrowingService
             $book->decrement('stok');
 
             // Borrow::create($data);
-            Borrow::create([
+            $borrow = Borrow::create([
                 'tanggal_peminjaman' => now(),
                 'tanggal_pengembalian' => now()->addDays(7),
                 'user_id' => auth()->user()->id,
                 'book_id' => $book->id,
                 'status' => 'dipinjam',
             ]);
+
+            $this->sendBorrowSuccessEmail($borrow);
+            return $borrow;
         });
     }
 
@@ -38,5 +43,11 @@ class BorrowingService
         $pinjam->update([
             'status' => 'dikembalikan',
         ]);
+    }
+
+    public function sendBorrowSuccessEmail(Borrow $borrow): void
+    {
+        Mail::to($borrow->user->email)->send(new BorrowSuccessMail($borrow));
+        
     }
 }
