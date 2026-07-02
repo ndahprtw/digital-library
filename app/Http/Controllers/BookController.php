@@ -9,6 +9,8 @@ use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\BookExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -109,5 +111,10 @@ class BookController extends Controller implements HasMiddleware
 
         // jika ingin menampilkan preview PDF
         return $pdf->stream('laporan.pdf');
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new BookExport(), 'laporan-buku.xlsx');
     }
 }

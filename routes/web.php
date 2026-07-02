@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('pinjam', BorrowController::class);
 
     Route::get('/buku/export/pdf', [BookController::class, 'exportPdf'])->name('buku.export.pdf');
+    Route::get('/buku/export/excel', [BookController::class, 'exportExcel'])->name('buku.export.excel');
     Route::resource('buku', BookController::class);
     Route::resource('user', UserController::class);
     Route::resource('kategori', CategoryController::class);

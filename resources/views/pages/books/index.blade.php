@@ -49,6 +49,10 @@
                                 <a href="{{ route('buku.export.pdf') }}" target="_blank" class="btn btn-danger">
                                     Export PDF
                                 </a>
+
+                                <a href="{{ route('buku.export.excel') }}" class="btn btn-success">
+                                    Export Excel
+                                </a>
                                 
                                 @can('create books')
                                     <a href="{{ route('buku.create') }}" class="btn btn-primary">Tambah Data</a>
