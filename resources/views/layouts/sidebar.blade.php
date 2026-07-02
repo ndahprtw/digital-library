@@ -35,7 +35,7 @@
           <li class="sidebar-item">
             <a class="sidebar-link" href="/user" aria-expanded="false">
               <span>
-                <i class="ti ti-person"></i>
+                <i class="ti ti-user"></i>
               </span>
               <span class="hide-menu">User</span>
             </a>

@@ -42,4 +42,11 @@ class BorrowController extends Controller implements HasMiddleware
         $this->borrowingService->returnBook($id);
         return redirect()->route('pinjam.index')->with('success', 'Buku Sukses Dikembalikan.');;
     }
+
+    public function read($id)
+    {
+        $notification = auth()->user()->notifications()->findOrFail($id);
+        $notification->markAsRead();
+        return redirect($notification->data['url']);
+    }
 }

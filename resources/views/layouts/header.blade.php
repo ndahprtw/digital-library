@@ -22,6 +22,58 @@
                   <i class="ti ti-align-justified fs-7"></i>
                 </a>
                 <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
+                  
+                  {{-- notifications --}}
+                  <li class="nav-item dropdown">
+                      <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown">
+                          <i class="ti ti-bell-ringing"></i>
+                          @if(auth()->user()->unreadNotifications->count())
+                              <div class="notification bg-danger rounded-circle"></div>
+                          @endif
+                      </a>
+
+                      <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up">
+                          <div class="d-flex align-items-center justify-content-between py-3 px-7">
+                              <h5 class="mb-0 fs-5 fw-semibold">Notifications</h5>
+                              <span class="badge bg-primary rounded-4 px-3 py-1">
+                                  {{ auth()->user()->unreadNotifications->count() }} New
+                              </span>
+                          </div>
+
+                          <div class="message-body" data-simplebar>
+                              @forelse(auth()->user()->notifications->take(5) as $notification)
+                                  <a href="{{ route('notifications.read', $notification->id) }}" class="py-3 px-4 d-flex align-items-start dropdown-item {{ is_null($notification->read_at) ? 'bg-secondary-subtle' : '' }}">
+                                      <span class="me-3">
+                                          <i class="ti ti-book fs-6 text-primary"></i>
+                                      </span>
+
+                                      <div class="w-100">
+                                          <h6 class="mb-1 fw-semibold">
+                                              {{ $notification->data['judul'] }}
+                                          </h6>
+                                          <span class="d-block text-muted">
+                                              {{ $notification->data['pesan'] }}
+                                          </span>
+                                          <small class="text-secondary">
+                                              {{ $notification->created_at->diffForHumans() }}
+                                          </small>
+                                      </div>
+                                  </a>
+                              @empty
+                                  <div class="text-center py-4 text-muted">
+                                      Belum ada notifikasi.
+                                  </div>
+                              @endforelse
+                          </div>
+                          {{-- <div class="py-3 text-center">
+                              <a href="#" class="btn btn-outline-primary">
+                                  Lihat Semua
+                              </a>
+                          </div> --}}
+
+                      </div>
+                  </li>
+
                   <li class="nav-item dropdown">
                     <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown" aria-expanded="false">
                       <div class="d-flex align-items-center">

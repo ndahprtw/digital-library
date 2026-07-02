@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Services;
-use Illuminate\Support\Facades\DB;
-
+use App\Mail\BorrowSuccessMail;
 use App\Models\Book;
 use App\Models\Borrow;
-
+use App\Notifications\BorrowSuccessNotification;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\BorrowSuccessMail;
+
 class BorrowingService
 {
     public function borrow(array $data)
@@ -31,7 +31,10 @@ class BorrowingService
                 'status' => 'dipinjam',
             ]);
 
-            $this->sendBorrowSuccessEmail($borrow);
+            // jika menggunakan laravel Mail
+            // $this->sendBorrowSuccessEmail($borrow);
+
+            $borrow->user->notify(new BorrowSuccessNotification($borrow));
             return $borrow;
         });
     }

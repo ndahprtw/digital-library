@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('kategori', CategoryController::class);
 
+    Route::get('/notifications/{id}', [BorrowController::class, 'read'])->name('notifications.read');
+
 });
 
 Route::get('/403', function () {
